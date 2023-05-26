@@ -33,7 +33,7 @@ Steps
 
 1. Clone the repo
    ```sh
-   git clone 
+   git clone https://github.com/FedeHerrera10/RGames
    ```
 3. Install NPM packages
    ```sh
@@ -51,4 +51,3 @@ Steps
 
 ### Live 
 
-h
