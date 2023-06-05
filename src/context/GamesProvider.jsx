@@ -9,6 +9,8 @@ const url = urlBase+'games?&sort-by=release-date';
 const config = {
     headers:{
         'Access-Control-Allow-Origin': '*',
+        'X-RapidAPI-Key': '06c424da72mshc8f5beeb98f41e7p1cfacejsnface601b048e',
+    'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com'
     }
 
 };

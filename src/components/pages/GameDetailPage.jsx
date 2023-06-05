@@ -24,8 +24,8 @@ export const GameDetailPage = () => {
   }, [])
   
   const{title,description,thumbnail} = game;
-  const minimum_system_requirements = game.minimum_system_requirements || {}
   
+  const minimum_system_requirements = game.minimum_system_requirements || {}
   
   const handleClickImage = e=> {
     setOpenModal(!openModal)
