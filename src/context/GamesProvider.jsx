@@ -1,16 +1,16 @@
 import axios from 'axios';
 import React,{createContext, useEffect, useState} from 'react'
 import { getURLApi } from '../Utilities/utilities';
+
 const GamesContext = createContext();
 
-//const url = 'https://cors-anywhere.herokuapp.com/freetogame.com/api/games?&sort-by=release-date';
 const urlBase=import.meta.env.VITE_BASE_URL;
 const url = urlBase+'games?&sort-by=release-date';
 const config = {
     headers:{
         'Access-Control-Allow-Origin': '*',
         'X-RapidAPI-Key': '06c424da72mshc8f5beeb98f41e7p1cfacejsnface601b048e',
-    'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com'
+        'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com'
     }
 
 };
@@ -21,6 +21,8 @@ const GamesProvider = ({children}) => {
         genre:'',
         sortby:'release-date'
     };
+
+
 
     const [games, setGames] = useState([{}]);
     const [gameHero,setGameHero]=useState({});
@@ -34,15 +36,8 @@ const GamesProvider = ({children}) => {
         const getAllGames = async()=> {
             setLoading(true);
             const data =await  axios.get(url,config);
-        
             setGames(data.data)
-            setIdGame(data.data[0].id)
-            
-            //setGames(allGames)
-            //setIdGame(allGames[0].id)
             setLoading(false);
-
-            
         }
     getAllGames();
     }, [])
@@ -53,7 +48,6 @@ const GamesProvider = ({children}) => {
             const url = getURLApi(filter);
             const data =await  axios.get(url,config);
             setGames(data.data)
-            setIdGame(data.data[0].id)
         }
         getGamesWhithFilters();
     }, [filter])
@@ -65,10 +59,11 @@ const GamesProvider = ({children}) => {
         const url = `${urlBase}game?id=${idGame}`;
         const data =await  axios.get(url,config);
         setGame(data.data)
-        
-        
-            setGameHero(data.data);
-        
+        if(Object.keys(gameHero).length == 0 ){
+         setHeroGameInLS(data.data)
+         const dataHero = getHeroGameInLS() ;
+         setGameHero(dataHero);
+        }
         setLoading(false);
         
 
@@ -79,7 +74,13 @@ const GamesProvider = ({children}) => {
     }, [idGame])
     
 
-
+    const setHeroGameInLS = (data) => {
+        localStorage.setItem('herog', JSON.stringify(data));
+    }
+    
+    const getHeroGameInLS = () => {
+        return JSON.parse(localStorage.getItem('herog')) ;
+    }
     
    
     
@@ -88,7 +89,6 @@ const GamesProvider = ({children}) => {
     }
 
     const changeIdGame = id => {
-        console.log(id)
         setIdGame(id)
     }
 

@@ -1,7 +1,7 @@
+
 export const getURLApi = (filter) =>{
+    let url=import.meta.env.VITE_BASE_URL+'games?';
     const{platform,genre,sortby}=filter
-    
-    let url ="https://cors-anywhere.herokuapp.com/freetogame.com/api/games?";
     
     if(platform !== "" && genre === ""){
       url=  url+`platform=${platform}&sort-by=${sortby}`

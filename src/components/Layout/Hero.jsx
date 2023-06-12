@@ -1,18 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { Spinner } from '../UI/Spinner';
 import useGames from '../../hooks/useGames';
 
+export const loaderHeroGame  = async => {
+
+}
+
 export const Hero = ({game}) => {
-const{gameHero}=useGames();
+const{gameHero,games,changeIdGame}=useGames();
 const {screenshots,title,short_description,release_date,platform} = gameHero;
-console.log(gameHero)
 const urlToGame = `/game/${game.id}`;
 const navigate =useNavigate();
 
 const handleOnClick = ()=>{
  navigate(urlToGame)
 }
+
+useEffect(() => {
+  changeIdGame(games[0].id)
+}, [])
 
 
 return (

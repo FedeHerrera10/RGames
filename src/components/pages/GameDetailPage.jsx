@@ -20,6 +20,7 @@ export const GameDetailPage = () => {
   
   useEffect(() => {
     window.scrollTo(0, 0)
+    console.log(id)
     setIdGame(id)
   }, [])
   
